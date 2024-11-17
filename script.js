@@ -52,14 +52,17 @@ function makeHTML() {
             dataItems[index]["background-color"]
           }; background-size: ${
             dataItems[index]["background-size"]
-          }; background-position: ${dataItems[index]["background-position"]};">
-          <div style="width: 100%; height: 100%;">${getContent(
-            face.content
-          )}</div></a>`
+          }; background-position: ${dataItems[index]["background-position"]}; ${
+            dataItems[index]["background-image"]
+              ? `background-image: url('${dataItems[index]["background-image"]}');`
+              : ""
+          }">
+        <div style="width: 100%; height: 100%;">${getContent(
+          face.content
+        )}</div></a>`
       )
       .join("") +
     "</div>";
-
   fusifyTag.innerHTML = htmlContent; // Вставляємо HTML-код куба в елемент <fusifytag>.
 
   addButtonsToFace(); // Додаємо кнопки на передню грань.
@@ -72,7 +75,14 @@ function getContent(content) {
       if (item.type === "image") {
         return `<img src="${item.path}" style="position: absolute; top: ${item.top}; left: ${item.left}; width: ${item.width}; height: ${item.height};"/>`;
       } else if (item.type === "video") {
-        return `<video src="${item.path}" style="position: absolute; top: ${item.top}; left: ${item.left}; width: ${item.width}; height: ${item.height};" autoplay loop muted></video>`;
+        // Задаємо вертикальні пропорції відео
+        return `<video src="${item.path}" 
+          style="position: absolute; 
+          top: ${item.top || "0"}; 
+          left: ${item.left || "0"}; 
+          width: ${item.width || "100%"}; 
+          height: ${item.height || "100%"}; 
+          object-fit: cover;" autoplay loop muted></video>`;
       }
     })
     .join(""); // Об'єднуємо всі елементи контенту в один рядок.
@@ -133,7 +143,7 @@ function getValue(name, attr) {
 function replaceCSS() {
   // Змінюємо стилі для body та куба.
   const body = document.querySelector("body");
-  body.style.height = "100vh";
+  body.style.height = "60vh";
   body.style.display = "flex";
   body.style.justifyContent = "center";
   body.style.alignItems = "center";
@@ -143,8 +153,8 @@ function replaceCSS() {
   body.style.boxSizing = "border-box";
 
   const cube = document.querySelector(".cube");
-  cube.style.width = "300px"; // Встановлюємо розміри куба.
-  cube.style.height = "300px";
+  cube.style.width = "150px"; // Встановлюємо розміри куба.
+  cube.style.height = "400px ";
   cube.style.position = "relative"; // Відносна позиція для гранів куба.
   cube.style.transformStyle = "preserve-3d"; // Дозволяємо 3D-трансформації.
 
@@ -173,8 +183,8 @@ function replaceCSS() {
 
   const sides = document.querySelectorAll(".side");
   sides.forEach((side) => {
-    side.style.width = "100%";
-    side.style.height = "100%";
+    side.style.width = "150px";
+    side.style.height = "300px";
     side.style.position = "absolute"; // Абсолютне позиціонування для гранів куба.
     side.style.backfaceVisibility = "hidden"; // Приховуємо зворотній бік грані.
     side.style.backgroundRepeat = "no-repeat"; // Вимикаємо повторення фону.
