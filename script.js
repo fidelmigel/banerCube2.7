@@ -2,8 +2,8 @@ let y = 0; // Змінна для зберігання поточного кут
 let autoRotateInterval; // Інтервал для автоматичного обертання куба.
 let mouseMoveTimeout; // Таймер для відновлення автоматичного обертання після зупинки руху миші.
 
-let sensitivity = 1.5; // Чутливість миші для контролю обертання куба.
-let touchSensitivity = 1.5; // Чутливість сенсорного екрану для обертання.
+let sensitivity = 2.5; // Чутливість миші для контролю обертання куба.
+let touchSensitivity = 0.5; // Чутливість сенсорного екрану для обертання.
 
 const fusifyTag = document.querySelector("fusifytag"); // Отримуємо елемент <fusifytag>.
 const dataItems = JSON.parse(getValue("data-items", fusifyTag.attributes)); // Парсимо JSON з атрибута data-items.
@@ -21,22 +21,22 @@ function makeHTML() {
     {
       class: "side front", // Передня грань
       content: dataItems[0]["content"], // Контент (відео або зображення) для передньої грані.
-      link: dataItems[0].link, // Посилання для передньої грані.
+      link: dataItems[0]["link"], // Посилання для передньої грані.
     },
     {
       class: "side back", // Задня грань
       content: dataItems[1]["content"],
-      link: dataItems[1].link,
+      link: dataItems[1]["link"],
     },
     {
       class: "side left", // Ліва грань
       content: dataItems[2]["content"],
-      link: dataItems[2].link,
+      link: dataItems[2]["link"],
     },
     {
       class: "side right", // Права грань
       content: dataItems[3]["content"],
-      link: dataItems[3].link,
+      link: dataItems[3]["link"],
     },
   ];
 
@@ -76,13 +76,19 @@ function getContent(content) {
         return `<img src="${item.path}" style="position: absolute; top: ${item.top}; left: ${item.left}; width: ${item.width}; height: ${item.height};"/>`;
       } else if (item.type === "video") {
         // Задаємо вертикальні пропорції відео
-        return `<video src="${item.path}" 
-          style="position: absolute; 
+        return `<video
+         src="${item.path}" 
+          style="
+          position: absolute; 
           top: ${item.top || "0"}; 
           left: ${item.left || "0"}; 
           width: ${item.width || "100%"}; 
           height: ${item.height || "100%"}; 
-          object-fit: cover;" autoplay loop muted></video>`;
+          object-fit: cover;
+          "autoplay
+          loop
+          muted>
+          </video>`;
       }
     })
     .join(""); // Об'єднуємо всі елементи контенту в один рядок.
@@ -154,7 +160,7 @@ function replaceCSS() {
 
   const cube = document.querySelector(".cube");
   cube.style.width = "150px"; // Встановлюємо розміри куба.
-  cube.style.height = "400px ";
+  cube.style.height = "400px";
   cube.style.position = "relative"; // Відносна позиція для гранів куба.
   cube.style.transformStyle = "preserve-3d"; // Дозволяємо 3D-трансформації.
 
