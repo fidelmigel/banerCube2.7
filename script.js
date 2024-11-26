@@ -221,8 +221,8 @@ function setCubeSize() {
     translateZ = 150;
   }
 
-  sensitivity = (sensitivity * cubeSize) / 200;
-  touchSensitivity = (touchSensitivity * cubeSize) / 200;
+  sensitivity = (sensitivity * cubeSize) / 150;
+  touchSensitivity = (touchSensitivity * cubeSize) / 150;
 
   cube.style.width = `${cubeSize}px`;
   cube.style.height = `${cubeSize}px`;
