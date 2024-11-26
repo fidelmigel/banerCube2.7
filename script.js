@@ -2,7 +2,7 @@ let y = 0; // Змінна для зберігання поточного кут
 let autoRotateInterval; // Інтервал для автоматичного обертання куба.
 let mouseMoveTimeout; // Таймер для відновлення автоматичного обертання після зупинки руху миші.
 
-const sensitivity = 0.1; // Чутливість миші для контролю обертання куба.
+const sensitivity = 0.85; // Чутливість миші для контролю обертання куба.
 const touchSensitivity = 0.01; // Чутливість сенсорного екрану для обертання.
 
 const fusifyTag = document.querySelector("fusifytag"); // Отримуємо елемент <fusifytag>.
