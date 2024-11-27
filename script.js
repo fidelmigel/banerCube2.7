@@ -109,6 +109,7 @@ function addButtonsToFace() {
   soundButton.style.bottom = "10px"; // Розташовуємо кнопку на відстані 10px від нижнього краю.
   soundButton.style.right = "10px"; // Встановлюємо відступ справа на 10px.
   soundButton.style.cursor = "pointer";
+
   frontFace.appendChild(soundButton); // Додаємо кнопку звуку на передню грань.
 
   // Знаходимо відео елемент, який розташований на цій грані
@@ -135,7 +136,12 @@ function addButtonsToFace() {
     }
   });
 }
+const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+if (isiOS) {
+  videoElement.setAttribute("playsinline", "true");
+  videoElement.removeAttribute("autoplay");
+}
 function getValue(name, attr) {
   // Функція для отримання значення з атрибутів елемента за його назвою.
   for (let j = 0; j < attr.length; j++) {
