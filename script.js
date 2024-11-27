@@ -136,12 +136,7 @@ function addButtonsToFace() {
     }
   });
 }
-const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-if (isiOS) {
-  videoElement.setAttribute("playsinline", "true");
-  videoElement.removeAttribute("autoplay");
-}
 function getValue(name, attr) {
   // Функція для отримання значення з атрибутів елемента за його назвою.
   for (let j = 0; j < attr.length; j++) {
@@ -240,10 +235,26 @@ function setCubeSize() {
   right.style.transform = `rotateY(90deg) translateZ(${translateZ}px)`;
 }
 
+function setupCubeEvents() {
+  // Обробка подій для куба
+}
+
+function setupVideoEvents() {
+  const videos = document.querySelectorAll("video");
+  videos.forEach((video) => {
+    video.removeAttribute("autoplay");
+    video.addEventListener("click", () => {
+      video.play();
+    });
+  });
+}
+
 window.onload = function () {
   makeHTML(); // Створюємо HTML-контент при завантаженні сторінки.
   replaceCSS(); // Застосовуємо стилі при завантаженні сторінки.
   startAutoRotate(); // Починаємо автоматичне обертання куба.
+  setupCubeEvents(); // Налаштовуємо події для куба
+  setupVideoEvents(); // Налаштовуємо події для відео
 
   let isMouseOverCube = false; // Прапорець, який вказує, чи знаходиться курсор над кубом.
   const cube = document.querySelector(".cube"); // Знаходимо елемент куба.
