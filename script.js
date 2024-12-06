@@ -2,7 +2,7 @@ let y = 0; // Змінна для зберігання поточного кут
 let autoRotateInterval; // Інтервал для автоматичного обертання куба.
 let mouseMoveTimeout; // Таймер для відновлення автоматичного обертання після зупинки руху миші.
 
-let sensitivity = 2.5; // Чутливість миші для контролю обертання куба.
+let sensitivity = 3.5; // Чутливість миші для контролю обертання куба.
 let touchSensitivity = 0.5; // Чутливість сенсорного екрану для обертання.
 
 const fusifyTag = document.querySelector("fusifytag"); // Отримуємо елемент <fusifytag>.
@@ -103,7 +103,7 @@ function addButtonsToFace() {
   // Створюємо кнопку звуку.
   let soundButton = document.createElement("img");
   soundButton.id = "soundButton"; // Додаємо ідентифікатор для кнопки.
-  soundButton.src = "images/no-sound.png"; // Іконка для "звук вимкнено" за замовчуванням
+  soundButton.src = "images/volume-x.svg"; // Іконка для "звук вимкнено" за замовчуванням
   soundButton.style.width = soundButtonConfig.width;
   soundButton.style.height = soundButtonConfig.height;
   soundButton.style.position = "absolute";
@@ -129,10 +129,10 @@ function addButtonsToFace() {
     if (videoElement) {
       if (videoElement.muted) {
         videoElement.muted = false; // Увімкнути звук
-        soundButton.src = "images/volume-up.png"; // Змінюємо іконку на "звук увімкнено"
+        soundButton.src = "images/volume-2.svg"; // Змінюємо іконку на "звук увімкнено"
       } else {
         videoElement.muted = true; // Вимкнути звук
-        soundButton.src = "images/no-sound.png"; // Змінюємо іконку на "звук вимкнено"
+        soundButton.src = "images/volume-x.svg"; // Змінюємо іконку на "звук вимкнено"
       }
     }
   });
