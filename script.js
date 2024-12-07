@@ -138,6 +138,37 @@ function addButtonsToFace() {
   });
 }
 
+function resetAutoRotate() {
+  clearTimeout(mouseMoveTimeout); // Очищаємо таймер для відновлення обертання.
+
+  mouseMoveTimeout = setTimeout(() => {
+    // Перевіряємо, чи куб все ще взаємодіє
+    const cube = document.querySelector(".cube");
+    if (cube && !isTouchingCube && !cube.matches(":hover")) {
+      startAutoRotate();
+    }
+  }, resetTimeout);
+}
+
+// Оновлюємо обробники подій
+const cube = document.querySelector(".cube"); // Перевіряємо, чи куб існує
+if (cube) {
+  cube.addEventListener("touchmove", function (e) {
+    if (isTouchingCube) {
+      const touch = e.touches[0];
+      y += (touch.clientX - window.innerWidth / 2) * touchSensitivity;
+      updateCubeRotation();
+      stopAutoRotate(); // Зупиняємо автоматичне обертання під час взаємодії
+    }
+  });
+
+  cube.addEventListener("touchend", function () {
+    isTouchingCube = false;
+    resetAutoRotate(); // Перезапускаємо автоматичне обертання
+  });
+} else {
+  console.error("Cube element not found!");
+}
 function getValue(name, attr) {
   // Функція для отримання значення з атрибутів елемента за його назвою.
   for (let j = 0; j < attr.length; j++) {
