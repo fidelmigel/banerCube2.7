@@ -201,6 +201,39 @@ function replaceCSS() {
   setCubeSize(); // Встановлюємо розміри куба залежно від ширини екрану.
 }
 
+// Забезпечення роботи миші та сенсору тільки при торканні куба.
+function setupEventListeners() {
+  let isMouseOverCube = false;
+  const cube = document.querySelector(".cube");
+
+  cube.addEventListener("mouseenter", function () {
+    isMouseOverCube = true;
+  });
+
+  cube.addEventListener("mouseleave", function () {
+    isMouseOverCube = false;
+  });
+
+  document.addEventListener("mousemove", function (e) {
+    if (isMouseOverCube) {
+      stopAutoRotate();
+      y += e.movementX * sensitivity;
+      updateCubeRotation();
+      resetAutoRotate();
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const touch = e.touches[0];
+    if (isTouchingCube) {
+      stopAutoRotate();
+      y += (touch.clientX - window.innerWidth / 2) * touchSensitivity;
+      updateCubeRotation();
+      resetAutoRotate();
+    }
+  });
+}
+
 function setCubeSize() {
   const cube = document.querySelector(".cube");
   const front = document.querySelector(".front");
