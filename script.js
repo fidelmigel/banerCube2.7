@@ -297,26 +297,36 @@ window.onload = function () {
     }
   });
 
-  // Обробляємо подію руху пальцем для сенсорних пристроїв.
-  document.addEventListener("touchmove", function (e) {
-    const touch = e.touches[0]; // Отримуємо перший дотик.
-    if (isMouseOverCube) {
-      // Перевіряємо, чи курсор (або палець) над кубом.
-      stopAutoRotate(); // Зупиняємо автоматичне обертання.
-      y += (touch.clientX - window.innerWidth / 2) * touchSensitivity; // Оновлюємо обертання куба в залежності від руху пальця.
-      updateCubeRotation(); // Оновлюємо обертання куба.
-      resetAutoRotate(); // Запускаємо таймер для автоматичного відновлення обертання.
-    }
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeFunctions();
   });
 
-  // Додаємо обробник для зміни видимості документа
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      startAutoRotate();
-    } else {
-      stopAutoRotate();
-    }
-  });
+  // Викликати цю функцію після кожного переходу по лінку
+  function initializeFunctions() {
+    replaceCSS();
+    setupEventListeners();
+
+    // Обробляємо подію руху пальцем для сенсорних пристроїв.
+    document.addEventListener("touchmove", function (e) {
+      const touch = e.touches[0]; // Отримуємо перший дотик.
+      if (isMouseOverCube) {
+        // Перевіряємо, чи курсор (або палець) над кубом.
+        stopAutoRotate(); // Зупиняємо автоматичне обертання.
+        y += (touch.clientX - window.innerWidth / 2) * touchSensitivity; // Оновлюємо обертання куба в залежності від руху пальця.
+        updateCubeRotation(); // Оновлюємо обертання куба.
+        resetAutoRotate(); // Запускаємо таймер для автоматичного відновлення обертання.
+      }
+    });
+
+    // Додаємо обробник для зміни видимості документа
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") {
+        startAutoRotate();
+      } else {
+        stopAutoRotate();
+      }
+    });
+  }
 };
 
 window.onresize = function () {
