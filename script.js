@@ -308,14 +308,16 @@ window.onload = function () {
       resetAutoRotate(); // Запускаємо таймер для автоматичного відновлення обертання.
     }
   });
+
+  // Додаємо обробник для зміни видимості документа
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      startAutoRotate();
+    } else {
+      stopAutoRotate();
+    }
+  });
 };
-document.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "visible") {
-    startAutoRotate();
-  } else {
-    stopAutoRotate();
-  }
-});
 
 window.onresize = function () {
   setCubeSize(); // Оновлюємо розміри куба при зміні розміру вікна.
