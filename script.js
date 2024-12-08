@@ -296,13 +296,7 @@ window.onload = function () {
       resetAutoRotate(); // Запускаємо таймер для автоматичного відновлення обертання.
     }
   });
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      startAutoRotate();
-    } else {
-      stopAutoRotate();
-    }
-  });
+
   // Обробляємо подію руху пальцем для сенсорних пристроїв.
   document.addEventListener("touchmove", function (e) {
     const touch = e.touches[0]; // Отримуємо перший дотик.
@@ -315,6 +309,13 @@ window.onload = function () {
     }
   });
 };
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "visible") {
+    startAutoRotate();
+  } else {
+    stopAutoRotate();
+  }
+});
 
 window.onresize = function () {
   setCubeSize(); // Оновлюємо розміри куба при зміні розміру вікна.
